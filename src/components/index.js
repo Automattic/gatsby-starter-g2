@@ -6,8 +6,8 @@ import { css, get } from '@wp-g2/styles';
 
 export function PluginCard( { title = "Plugin" } ) {
 	return (
-		<Card m={ 3 } css={ "border-radius: 2px;" }>
-			<CardBody css={ "padding: 0; border-radius: 2px;" }>
+		<Card m={ 3 }>
+			<CardBody css={ "padding: 0;" }>
 					<Grid columns={ 2 } templateColumns={ "50px auto" } align={ "start" } gap={ "0px" }>
 						<Placeholder width={ 50 } height={ 50 } css={ "border-radius: 50%; margin: 12px 12px 0 !important;" } />
 						<VStack css={ "padding: 12px 12px 6px 24px" }>
@@ -30,7 +30,6 @@ export function PluginCard( { title = "Plugin" } ) {
 						</HStack>
 					</Grid>
 			</CardBody>
-			<Elevation value={ 2 } css={ "border-radius: 2px;" } isInteractive />
 		</Card>
 	);
 }
