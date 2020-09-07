@@ -55,7 +55,7 @@ function Page() {
 						</Spacer>
 						<Spacer my={ 8 }>
 							<Grid rows={ 2 } columns={ 2 } templateColumns={ "66% auto" } gap={ "16px" }>
-								<Card css={ "grid-row: 1 / span 2; text-align: center; " }>
+								<Card css={ "grid-row: 1 / span 2; text-align: center;" }>
 									<CardBody>
 										<VStack>
 											<Placeholder width={ 150 } height={ 150 } css={ "border-radius: 2px; margin: 0 auto 20px !important;" } />
@@ -84,7 +84,7 @@ function Page() {
 						</Spacer>
 						<Spacer my={ 8 }>
 							<Grid rows={ 2 } columns={ 2 } templateColumns={ "66% auto" } gap={ "16px" }>
-								<Card css={ "grid-row: 1 / span 2; text-align: center;"}>
+								<Card css={ "grid-row: 1 / span 2; text-align: center;" }>
 									<CardBody>
 										<VStack>
 											<Placeholder width={ 150 } height={ 150 } css={ "border-radius: 2px; margin: 0 auto 20px !important;" } />
