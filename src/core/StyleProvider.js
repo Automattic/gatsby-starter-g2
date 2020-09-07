@@ -5,7 +5,6 @@ export function StyleProvider({ children }) {
   const theme = {
     cardBorderRadius: "2px",
   }
-  console.log(ThemeProvider, theme)
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }
