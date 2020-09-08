@@ -5,7 +5,7 @@ import { ui } from "@wp-g2/styles"
 import { FiStar } from '@wp-g2/icons'
 import { Layout } from "../core"
 import { PluginCard } from "../components"
-import { useBoolState } from 'use-enhanced-state'
+import { useLocalState } from 'use-enhanced-state'
 
 function InfoCard( { title, content } ) {
 	return (
@@ -24,14 +24,14 @@ function InfoCard( { title, content } ) {
 
 function Page() {
 
-	const [ upgraded, setUpgraded ] = useBoolState( false );
-	const [ activated, setActivated ] = useBoolState( false );
+	const [ pluginConfig, setPluginConfig ] = useLocalState( 'plugins', { pluginConfig } );
 
-	const showUpgraded = ( state ) => {
-		state ? setUpgraded.true() : setUpgraded.false();
+	const upgradeAccount = () => {
+		setPluginConfig( { upgraded: true } );
 	};
-	const showActivated = ( state ) => {
-		state ? setActivated.true() : setActivated.false();
+
+	const activatePlugin = () => {
+		! pluginConfig.activated ? setPluginConfig( { activated: true, upgraded: true } ) : setPluginConfig( { activated: false, upgraded: true } );
 	};
 
 	return (
@@ -39,11 +39,11 @@ function Page() {
 			<View css={ "max-width: 900px; margin: 36px auto !important;" }>
 				<Spacer my={ 5 }>
 					<HStack spacing={ 5 } alignment="center">
-						{ upgraded && activated &&
+						{ pluginConfig.upgraded && pluginConfig.activated &&
 							<Spacer>
 								<Alerts>
 									<Alert status="success">
-										<Text>Your plugin has been added</Text>
+										<Text>This plugin has been added to your site</Text>
 									</Alert>
 								</Alerts>
 							</Spacer>
@@ -62,12 +62,12 @@ function Page() {
 										<Text>by <Link to="/">Plugin author</Link></Text>
 									</VStack>
 								</Spacer>
-								{ ! upgraded &&
-									<Button onClick={ () => showUpgraded( true ) }>Upgrade to add plugin</Button>
+								{ ! pluginConfig.upgraded &&
+									<Button onClick={ () => upgradeAccount() }>Upgrade to add plugin</Button>
 								}
-								{ upgraded &&
-									<Button onClick={ () => showActivated( true ) }>
-										{ ! activated ? "Add plugin" : "Active" }
+								{ pluginConfig.upgraded &&
+									<Button onClick={ () => activatePlugin() }>
+										{ ! pluginConfig.activated ? "Add plugin" : "Remove plugin" }
 									</Button>
 								}
 							</HStack>
@@ -111,7 +111,7 @@ function Page() {
 						</CardBody>
 					</Card>
 				</Spacer>
-				<Tabs selectedId={ activated ? "support" : "description" }>
+				<Tabs selectedId={ pluginConfig.activated ? "support" : "description" }>
 					<TabList css={ "width: 33%" }>
 						<Tab id="description">Description</Tab>
 						<Tab>Reviews</Tab>

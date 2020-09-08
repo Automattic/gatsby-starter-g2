@@ -3,14 +3,14 @@ import { Link } from "gatsby"
 import { Button, Heading, Dropdown, DropdownMenu, DropdownTrigger, DropdownMenuItem, Text, HStack, VStack, Spacer, View, Card, Placeholder, Grid, CardBody, SearchInput } from "@wp-g2/components"
 import { Layout } from "../core"
 import { PluginCard, PluginGrid } from '../components'
-import { useBoolState } from 'use-enhanced-state';
+import { useLocalState } from 'use-enhanced-state';
 
 function Page() {
 	
-	const [ upgraded, setUpgraded ] = useBoolState( false );
+	const [ pluginConfig, setPluginConfig ] = useLocalState( 'plugins', { upgraded: false, activated: false } );
 
-	const showUpgraded = ( state ) => {
-		state ? setUpgraded.true() : setUpgraded.false();
+	const upgradeAccount = () => {
+		setPluginConfig( { upgraded: true } );
 	};
 
 	return (
@@ -19,10 +19,10 @@ function Page() {
 				<Spacer my={ 8 }>
 					<HStack  spacing={8} alignment="edge">
 						<Heading size={ 1 }>Browse Plugins</Heading>
-						{ ! upgraded &&
-							<Button onClick={ () => showUpgraded( true ) }>Upgrade to add plugins</Button>
+						{ ! pluginConfig.upgraded &&
+							<Button onClick={ () => upgradeAccount() }>Upgrade to add plugins</Button>
 						}
-						{ upgraded &&
+						{ pluginConfig.upgraded &&
 							<Button as={ Link } to={ "/upload" } >Upload plugin</Button>
 						}
 					</HStack>	
@@ -44,7 +44,7 @@ function Page() {
 						</Dropdown>
 					</HStack>
 				</Spacer>
-				{ ! upgraded ? (
+				{ ! pluginConfig.upgraded ? (
 					<View>
 						<Spacer my={ 8 }>
 							<HStack>
