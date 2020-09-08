@@ -7,12 +7,13 @@
 
 import React from "react"
 import { SEO } from "./SEO"
+import { StyleProvider } from "./StyleProvider"
 
 export function Layout({ children, title, description }) {
   return (
-    <>
+    <StyleProvider>
       <SEO title={title} description={description} />
       {children}
-    </>
+    </StyleProvider>
   )
 }
