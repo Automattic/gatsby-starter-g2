@@ -15,7 +15,7 @@ function Page() {
 
 	return (
 		<Layout title="Plugins">
-			<View m={5} css={ "max-width: 900px; margin: 36px auto !important;" }>
+			<View css={ "max-width: 900px; margin: 36px auto !important;" }>
 				<Spacer my={ 8 }>
 					<HStack  spacing={8} alignment="edge">
 						<Heading size={ 1 }>Browse Plugins</Heading>
